@@ -1,0 +1,200 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="../Shared/auth.js"></script>
+    <script src="../Shared/role-ui.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        background: #f5f8ef;
+        color: #17210f;
+      }
+      .wrap {
+        max-width: 1180px;
+        margin: auto;
+        padding: 26px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .top h1 {
+        color: #14532d;
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .nav a {
+        background: #e2e8f0;
+        color: #14532d;
+        text-decoration: none;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-weight: 800;
+      }
+      .nav a:hover {
+        background: #14532d;
+        color: white;
+      }
+      .hero {
+        background: linear-gradient(135deg, #123524, #16a34a);
+        color: white;
+        border-radius: 10px;
+        padding: 28px;
+        margin: 18px 0;
+      }
+      .hero h2 {
+        font-size: 34px;
+        margin-bottom: 8px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .card {
+        background: white;
+        border: 1px solid #dbe5dc;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+      }
+      .card i {
+        font-size: 28px;
+        color: #16a34a;
+        margin-bottom: 12px;
+      }
+      .card h3 {
+        color: #14532d;
+        margin-bottom: 8px;
+      }
+      .card p {
+        color: #64748b;
+        line-height: 1.5;
+      }
+      .panel {
+        margin-top: 18px;
+        background: #fff7ed;
+        border-left: 5px solid #f59e0b;
+        border-radius: 10px;
+        padding: 18px;
+      }
+      .danger {
+        background: #fef2f2;
+        border-left-color: #dc2626;
+      }
+      .success {
+        background: #ecfdf5;
+        border-left-color: #16a34a;
+      }
+      .device {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .device button {
+        border: 0;
+        background: #14532d;
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      @media (max-width: 850px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .top {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+      <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body data-required-role="admin">
+    <main class="wrap">
+      <div class="top">
+        <h1><i class="fa-solid fa-user-shield"></i> Admin Dashboard</h1>
+        <nav class="nav">
+          <a href="../Dashboard/admindashboard.html">Home</a><a href="../Dashboard/adminmanagement.html">Admin Management</a><a href="../Marketplace/marketplace.html">Marketplace</a
+          ><a href="../Weather/weather.html">Weather</a
+          ><a
+            href="../Loginpage/login.html"
+            onclick="
+              localStorage.clear();
+              sessionStorage.clear();
+            "
+            >Logout</a
+          >
+        </nav>
+      </div>
+      <section class="hero">
+        <h2>Full platform monitoring and role management</h2>
+        <p>This page shows only the tools useful for the admin role.</p>
+      </section>
+      <section class="grid">
+        <article class="card" data-href="../Dashboard/adminmanagement.html">
+          <i class="fa-solid fa-users-gear"></i>
+          <h3>User Control</h3>
+          <p>Review farmer, vendor and user accounts with live database records.</p>
+        </article>
+        <article class="card" data-href="../Marketplace/marketplace.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Reports</h3>
+          <p>Monitor marketplace, weather and consultation modules.</p>
+        </article>
+        <article class="card">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <h3>Danger Alerts</h3>
+          <button
+            data-danger="Admin danger alert: unauthorized access attempt."
+            class="mini-action"
+          >
+            Show Danger
+          </button>
+          <p>Review failed access, warnings and system issues.</p>
+        </article>
+      </section>
+      <section class="panel success">
+        <h3>Popup System Ready</h3>
+        <p>
+          Success, warning, and danger popups are active for role actions and
+          access control.
+        </p>
+      </section>
+    </main>
+      <script src="../Shared/dashboard-sidebar.js"></script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+

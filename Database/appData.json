@@ -1,0 +1,89 @@
+{
+  "users": [
+    {
+      "id": "USR-FARMER",
+      "name": "Demo Farmer",
+      "username": "farmer",
+      "role": "farmer",
+      "city": "Ahmedabad",
+      "phone": "90000 11111",
+      "status": "active",
+      "joinedAt": "2026-05-01",
+      "updatedAt": "2026-05-27T06:26:45.114Z"
+    },
+    {
+      "id": "USR-VENDOR",
+      "name": "Demo Vendor",
+      "username": "vendor",
+      "role": "vendor",
+      "city": "Surat",
+      "phone": "90000 22222",
+      "status": "active",
+      "joinedAt": "2026-05-03"
+    },
+    {
+      "id": "USR-USER",
+      "name": "Demo User",
+      "username": "user",
+      "role": "user",
+      "city": "Pune",
+      "phone": "90000 33333",
+      "status": "active",
+      "joinedAt": "2026-05-06"
+    },
+    {
+      "id": "USR-ADMIN",
+      "name": "Admin",
+      "username": "admin",
+      "role": "admin",
+      "city": "Mumbai",
+      "phone": "90000 44444",
+      "status": "active",
+      "joinedAt": "2026-05-10"
+    }
+  ],
+  "orders": [
+    {
+      "orderId": "SF-DEMO-101",
+      "customer": "Demo Farmer",
+      "items": [
+        {
+          "name": "Hybrid Wheat Seeds",
+          "qty": 2
+        }
+      ],
+      "total": 1700,
+      "status": "Placed",
+      "createdAt": "2026-05-20T10:30:00.000Z"
+    }
+  ],
+  "bookings": [
+    {
+      "bookingId": "EQB-DEMO-201",
+      "equipmentName": "Tractor",
+      "userName": "Demo Farmer",
+      "status": "Pending",
+      "createdAt": "2026-05-21T09:15:00.000Z"
+    }
+  ],
+  "bills": [
+    {
+      "billId": "BILL-DEMO-301",
+      "days": 2,
+      "rentPerDay": 2500,
+      "damageCharge": 0,
+      "lateCharge": 150,
+      "total": 5150,
+      "createdAt": "2026-05-22T14:20:00.000Z"
+    }
+  ],
+  "payments": [
+    {
+      "paymentId": "PAY-DEMO-401",
+      "method": "upi",
+      "amount": 1700,
+      "status": "Payment Simulated",
+      "createdAt": "2026-05-20T10:35:00.000Z"
+    }
+  ]
+}

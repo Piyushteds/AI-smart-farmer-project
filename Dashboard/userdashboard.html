@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="../Shared/auth.js"></script>
+    <script src="../Shared/role-ui.js"></script>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+      body {
+        min-height: 100vh;
+        background: radial-gradient(circle at 8% 0%, rgba(22,163,74,.16), transparent 28%), radial-gradient(circle at 92% 10%, rgba(245,158,11,.16), transparent 26%), linear-gradient(135deg, #f8fafc 0%, #eef7ed 48%, #fefce8 100%);
+        color: #17210f;
+      }
+      .wrap { max-width: 1220px; margin: auto; padding: 28px; animation: pageIn .55s ease both; }
+      .top { display: flex; justify-content: space-between; gap: 14px; align-items: center; margin-bottom: 18px; }
+      .top h1 { color: #14532d; display: flex; gap: 10px; align-items: center; }
+      .nav { display: flex; gap: 10px; flex-wrap: wrap; }
+      .nav a { background: white; color: #14532d; text-decoration: none; padding: 11px 13px; border-radius: 10px; font-weight: 900; border: 1px solid #dbe5dc; box-shadow: 0 8px 18px rgba(15,23,42,.06); }
+      .nav a:hover { background: #14532d; color: white; transform: translateY(-2px); }
+      .hero { background: linear-gradient(135deg, rgba(18,53,36,.98), rgba(22,163,74,.82)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400'); background-size: cover; background-position: center; color: white; border-radius: 18px; padding: 34px; margin: 18px 0; box-shadow: 0 18px 44px rgba(15,23,42,.16); position: relative; overflow: hidden; }
+      .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent, rgba(255,255,255,.16), transparent); transform: translateX(-100%); animation: shine 5s ease-in-out infinite; pointer-events: none; }
+      .hero h2 { font-size: 40px; margin-bottom: 10px; position: relative; z-index: 1; }
+      .hero p { color: #ecfdf5; line-height: 1.6; position: relative; z-index: 1; max-width: 780px; }
+      .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+      .stat, .card, .panel { background: white; border: 1px solid rgba(219,229,220,.9); border-radius: 16px; padding: 18px; box-shadow: 0 12px 28px rgba(15,23,42,.08); }
+      .stat { display: grid; gap: 7px; animation: cardIn .55s ease both; }
+      .stat i { color: #16a34a; font-size: 24px; }
+      .stat strong { color: #14532d; font-size: 24px; }
+      .stat small { color: #64748b; font-weight: 800; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .card { cursor: pointer; transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease; animation: cardIn .55s ease both; min-height: 210px; display: flex; flex-direction: column; }
+      .card:nth-child(2), .stat:nth-child(2) { animation-delay: .06s; }
+      .card:nth-child(3), .stat:nth-child(3) { animation-delay: .12s; }
+      .card:nth-child(4), .stat:nth-child(4) { animation-delay: .18s; }
+      .card:hover { transform: translateY(-7px); border-color: rgba(22,163,74,.45); box-shadow: 0 20px 38px rgba(15,23,42,.14); }
+      .card i { font-size: 30px; color: #16a34a; margin-bottom: 12px; animation: iconFloat 3s ease-in-out infinite; }
+      .card h3 { color: #14532d; margin-bottom: 8px; }
+      .card p { color: #64748b; line-height: 1.5; }
+      .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 14px; }
+      .tag { background: #dcfce7; color: #14532d; border-radius: 999px; padding: 7px 9px; font-size: 12px; font-weight: 900; }
+      .panel { margin-top: 18px; border-left: 5px solid #16a34a; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+      .panel h3 { color: #14532d; margin-bottom: 5px; }
+      .panel p { color: #64748b; line-height: 1.5; }
+      .device { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+      .device button, .mini-action { border: 0; background: #14532d; color: #fff; padding: 10px 14px; border-radius: 10px; font-weight: 900; cursor: pointer; }
+      .mini-action:hover, .device button:hover { background: #0f3d24; transform: translateY(-2px); }
+      @keyframes shine { 0%,55% { transform: translateX(-100%); } 75%,100% { transform: translateX(100%); } }
+      @keyframes pageIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes cardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes iconFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      @media (max-width: 900px) { .grid, .stats { grid-template-columns: repeat(2, 1fr); } .top, .panel { align-items: flex-start; flex-direction: column; } }
+      @media (max-width: 620px) { .wrap { padding: 16px; } .grid, .stats { grid-template-columns: 1fr; } .hero h2 { font-size: 30px; } }
+          /* Dashboard image polish */
+      .dashboard-showcase { display: grid; grid-template-columns: minmax(0, 1.35fr) .75fr; gap: 16px; margin: 18px 0; }
+      .large-visual, .small-visuals article { min-height: 300px; border-radius: 18px; background-size: cover; background-position: center; overflow: hidden; position: relative; box-shadow: 0 18px 38px rgba(15, 23, 42, .16); border: 1px solid rgba(255,255,255,.45); }
+      .large-visual div { position: absolute; inset: auto 18px 18px 18px; color: white; max-width: 620px; }
+      .large-visual span, .small-visuals span { display: inline-flex; padding: 7px 10px; border-radius: 999px; background: rgba(255,255,255,.18); backdrop-filter: blur(10px); color: white; font-size: 12px; font-weight: 900; margin-bottom: 8px; }
+      .large-visual h3 { font-size: 30px; margin-bottom: 6px; }
+      .large-visual p { color: #ecfdf5; line-height: 1.55; }
+      .small-visuals { display: grid; gap: 16px; }
+      .small-visuals article { min-height: 142px; display: flex; align-items: end; padding: 14px; }
+      .card { overflow: hidden; }
+      .card::before { content: ""; display: block; height: 92px; margin: -18px -18px 14px; background-size: cover; background-position: center; border-radius: 16px 16px 0 0; }
+      .card:nth-child(1)::before { background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700"); }
+      .card:nth-child(2)::before { background-image: url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=700"); }
+      .card:nth-child(3)::before { background-image: url("https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=700"); }
+      .card:nth-child(4)::before { background-image: url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700"); }
+      .card:nth-child(5)::before { background-image: url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700"); }
+      .card:nth-child(6)::before { background-image: url("https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700"); }
+      @media (max-width: 760px) { .dashboard-showcase { grid-template-columns: 1fr; } .large-visual { min-height: 260px; } .small-visuals { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 480px) { .large-visual { min-height: 230px; } .large-visual h3 { font-size: 22px; } .small-visuals { grid-template-columns: 1fr; } }
+    </style>
+      <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body data-required-role="user">
+    <main class="wrap">
+      <div class="top">
+        <h1><i class="fa-solid fa-user"></i> User Dashboard</h1>
+        <nav class="nav"><a href="../Dashboard/main.html">Home</a><a href="../Marketplace/marketplace.html">Marketplace</a><a href="../Weather/weather.html">Weather</a><a href="../Services/expertconsulation.html">Experts</a><a href="../Loginpage/login.html" onclick="localStorage.clear();sessionStorage.clear();">Logout</a></nav>
+      </div>
+      <section class="hero"><h2>Smart Farming Services and Help Center</h2><p>User role ke liye marketplace shopping, payment help, city weather alerts, expert consultation aur chatbot support.</p></section>
+      <section class="dashboard-showcase user-showcase">
+        <article class="large-visual" style="background-image: linear-gradient(135deg, rgba(18,53,36,.2), rgba(15,23,42,.12)), url('https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=1200');">
+          <div><span>Premium View</span><h3>Smart Services Gallery</h3><p>Marketplace shopping, weather alerts aur expert help ko image-led service cards me dekho.</p></div>
+        </article>
+        <div class="small-visuals">
+          <article style="background-image: linear-gradient(135deg, rgba(18,53,36,.32), rgba(22,163,74,.12)), url('https://images.unsplash.com/photo-1524593166156-312f362cada0?auto=format&fit=crop&w=700');"><span>Field Ready</span></article>
+          <article style="background-image: linear-gradient(135deg, rgba(18,53,36,.32), rgba(245,158,11,.12)), url('https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=700');"><span>Smart Action</span></article>
+        </div>
+      </section>      <section class="stats"><article class="stat"><i class="fa-solid fa-store"></i><strong>Shop</strong><small>Marketplace</small></article><article class="stat"><i class="fa-solid fa-heart"></i><strong>Wishlist</strong><small>Saved products</small></article><article class="stat"><i class="fa-solid fa-cloud-sun"></i><strong>Weather</strong><small>City alerts</small></article><article class="stat"><i class="fa-solid fa-headset"></i><strong>Expert</strong><small>Consultation</small></article></section>
+      <section class="grid">        <article class="card" data-href="../Marketplace/marketplace.html"><i class="fa-solid fa-basket-shopping"></i><h3>Buy Farm Products</h3><p>Seeds, fertilizer, tools aur irrigation products browse karo.</p><div class="tag-row"><span class="tag">UPI</span><span class="tag">COD</span></div></article>
+        <article class="card" data-href="../Weather/weather.html"><i class="fa-solid fa-cloud-sun-rain"></i><h3>City Weather Alerts</h3><p>Weather ke hisaab se success, warning, danger popup dekho.</p><div class="tag-row"><span class="tag">Rain</span><span class="tag">AQI</span></div></article>
+        <article class="card" data-href="../Services/expertconsulation.html"><i class="fa-solid fa-headset"></i><h3>Expert Consultation</h3><p>Crop, soil, fertilizer aur irrigation help ke liye expert book karo.</p><div class="tag-row"><span class="tag">24/7</span><span class="tag">Advice</span></div></article>
+        <article class="card"><i class="fa-solid fa-bell"></i><h3>My Alerts</h3><p>Pending consultation aur payment reminder popup.</p><button data-warning="Your consultation booking is pending." class="mini-action">Show Warning</button></article>
+        <article class="card"><i class="fa-solid fa-credit-card"></i><h3>Payment Help</h3><p>Marketplace me UPI scanner, card aur COD options available hain.</p><button data-success="Payment guide opened successfully." class="mini-action">Payment Guide</button></article>
+        <article class="card" data-href="../Dashboard/main.html"><i class="fa-solid fa-robot"></i><h3>Smart Chatbot</h3><p>Dashboard par chatbot se crop, weather, disease, payment questions pucho.</p><div class="tag-row"><span class="tag">AI</span><span class="tag">Multi-language</span></div></article></section>
+      <section class="panel"><div><h3>User Service Panel Ready</h3><p>Marketplace, weather alert, expert consultation, payment help aur chatbot support linked hain.</p></div><button data-success="User panel updated successfully." class="mini-action">Show Success</button></section>
+    </main>
+      <script src="../Shared/dashboard-sidebar.js"></script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
