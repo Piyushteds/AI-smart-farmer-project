@@ -1,0 +1,313 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Farmer Disease Upload</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        min-height: 100vh;
+        background: #f4fbf2;
+        color: #183421;
+      }
+      .page {
+        max-width: 1120px;
+        margin: auto;
+        padding: 28px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .back {
+        border: 0;
+        background: #14532d;
+        color: white;
+        text-decoration: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      .hero {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(20, 83, 45, 0.92),
+            rgba(34, 197, 94, 0.78)
+          ),
+          url("https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1200");
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        color: white;
+        padding: 34px;
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+      .panel {
+        background: white;
+        border-radius: 8px;
+        padding: 22px;
+        box-shadow: 0 10px 25px rgba(24, 52, 33, 0.12);
+      }
+      .upload-box {
+        border: 2px dashed #22c55e;
+        border-radius: 8px;
+        padding: 28px;
+        text-align: center;
+        background: #f0fdf4;
+      }
+      .upload-box i {
+        font-size: 46px;
+        color: #16a34a;
+        margin-bottom: 12px;
+      }
+      .upload-box input {
+        margin-top: 18px;
+      }
+      .preview {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 8px;
+        background: #e5e7eb;
+        margin-top: 18px;
+        display: none;
+      }
+      .field {
+        display: grid;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .field select,
+      .field textarea {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 15px;
+      }
+      .field textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      .btn {
+        border: 0;
+        background: #f59e0b;
+        color: #17210f;
+        padding: 13px 18px;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
+        margin-top: 18px;
+      }
+      .result {
+        display: none;
+        margin-top: 18px;
+        background: #ecfdf5;
+        border-left: 5px solid #16a34a;
+        padding: 16px;
+        border-radius: 8px;
+      }
+      .result h3 {
+        color: #14532d;
+        margin-bottom: 8px;
+      }
+      .tips {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .tip {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        background: #f8fafc;
+        padding: 12px;
+        border-radius: 8px;
+      }
+      .tip i {
+        color: #16a34a;
+        margin-top: 3px;
+      }
+      @media (max-width: 760px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .hero h1 {
+          font-size: 28px;
+        }
+        .top {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    .quick-nav{display:flex;gap:10px;flex-wrap:wrap;margin:-8px 0 22px}.quick-nav a{background:#e2e8f0;color:#14532d;text-decoration:none;padding:10px 12px;border-radius:8px;font-weight:800}.quick-nav a:hover{background:#14532d;color:white}
+  </style>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314532d'/%3E%3Cpath d='M32 51c-8-9-15-18-15-29 10 0 16 5 18 14 3-7 8-11 16-12-1 16-8 25-19 27Z' fill='%23dcfce7'/%3E%3Cpath d='M31 50c2-12 5-22 13-30' stroke='%23facc15' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <script src="../Shared/auth.js"></script>
+  <script src="../Shared/role-ui.js"></script>
+  <script src="../Shared/role-content.js"></script>
+    <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="top">
+        <h2><i class="fa-solid fa-leaf"></i> Smart Farmer</h2>
+        <a class="back" href="../Dashboard/main.html"
+          ><i class="fa-solid fa-arrow-left"></i> Back Home</a
+        >
+      </div>
+      <nav class="quick-nav"><a href="../Dashboard/main.html"><i class="fa-solid fa-house"></i> Home</a><a data-roles="farmer,vendor,user,admin" href="../Marketplace/marketplace.html"><i class="fa-solid fa-store"></i> Marketplace</a><a data-roles="farmer,user,admin" href="../Weather/weather.html"><i class="fa-solid fa-cloud-sun"></i> Weather</a><a data-roles="farmer,admin" href="../Services/diseaseupload.html"><i class="fa-solid fa-leaf"></i> Disease</a><a data-roles="farmer,vendor,admin" href="../Services/eqipmentrental.html"><i class="fa-solid fa-tractor"></i> Equipment</a><a data-roles="farmer,vendor,user,admin" href="../Services/expertconsulation.html"><i class="fa-solid fa-user-doctor"></i> Experts</a><a data-roles="farmer,vendor,user,admin" href="../Loginpage/login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></nav>
+
+      <section class="hero">
+        <h1>Crop Disease Upload</h1>
+        <p>
+          Upload a clear leaf photo and get an instant demo diagnosis with
+          treatment guidance.
+        </p>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>Upload Crop Image</h2>
+          <div class="upload-box">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <h3>Select leaf or crop photo</h3>
+            <p>Use a bright, close-up image for better results.</p>
+            <input type="file" id="cropImage" accept="image/*" />
+            <img id="preview" class="preview" alt="Crop preview" />
+          </div>
+          <div class="field">
+            <label for="cropType">Crop Type</label>
+            <select id="cropType">
+              <option>Tomato</option>
+              <option>Wheat</option>
+              <option>Rice</option>
+              <option>Cotton</option>
+              <option>Potato</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="symptoms">Visible Symptoms</label>
+            <textarea
+              id="symptoms"
+              placeholder="Example: yellow spots, curled leaves, black patches"
+            ></textarea>
+          </div>
+          <button class="btn" id="analyzeBtn">
+            <i class="fa-solid fa-microscope"></i> Analyze Image
+          </button>
+        </div>
+
+        <div class="panel">
+          <h2>AI Diagnosis Result</h2>
+          <div id="emptyState" class="tips">
+            <div class="tip">
+              <i class="fa-solid fa-camera"></i>
+              <p>Upload image first, then click Analyze Image.</p>
+            </div>
+            <div class="tip">
+              <i class="fa-solid fa-sun"></i>
+              <p>Avoid blurry photos and shadows on the leaf.</p>
+            </div>
+            <div class="tip">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>
+                This page gives demo guidance. Confirm serious infection with an
+                expert.
+              </p>
+            </div>
+          </div>
+          <div id="result" class="result">
+            <h3 id="diseaseName">Leaf Spot Detected</h3>
+            <p><b>Severity:</b> <span id="severity">Medium</span></p>
+            <p>
+              <b>Treatment:</b> Remove infected leaves, improve airflow, and use
+              organic fungicide spray.
+            </p>
+            <p>
+              <b>Advice:</b> Water near roots and avoid wetting leaves in
+              evening.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      const cropImage = document.getElementById("cropImage");
+      const preview = document.getElementById("preview");
+      const analyzeBtn = document.getElementById("analyzeBtn");
+      const result = document.getElementById("result");
+      const emptyState = document.getElementById("emptyState");
+      const diseaseName = document.getElementById("diseaseName");
+      const severity = document.getElementById("severity");
+      cropImage.addEventListener("change", () => {
+        const file = cropImage.files[0];
+        if (!file) return;
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+      });
+      analyzeBtn.addEventListener("click", () => {
+        if (!cropImage.files.length) {
+          alert("Please upload a crop image first.");
+          return;
+        }
+        const crop = document.getElementById("cropType").value;
+        const options = {
+          Tomato: "Tomato Early Blight",
+          Wheat: "Wheat Rust",
+          Rice: "Rice Blast",
+          Cotton: "Cotton Leaf Curl",
+          Potato: "Potato Late Blight",
+          Other: "Unknown Crop Disease",
+        };
+        diseaseName.textContent = options[crop] || "Leaf Spot Detected";
+        severity.textContent = ["Low", "Medium", "High"][
+          Math.floor(Math.random() * 3)
+        ];
+        emptyState.style.display = "none";
+        result.style.display = "block";
+      });
+    </script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

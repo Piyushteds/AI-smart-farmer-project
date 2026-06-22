@@ -1,0 +1,451 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Farmer Rental Billing</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="../Shared/auth.js"></script>
+    <script src="../Shared/role-ui.js"></script>
+    <script src="../Shared/role-content.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f8fafc, #eef7ed 55%, #fefce8);
+        color: #102016;
+      }
+      .wrap {
+        max-width: 1180px;
+        margin: auto;
+        padding: 28px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .top h1 {
+        color: #14532d;
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .nav a {
+        text-decoration: none;
+        background: #14532d;
+        color: white;
+        padding: 11px 14px;
+        border-radius: 10px;
+        font-weight: 800;
+      }
+      .hero {
+        background: linear-gradient(135deg, #14532d, #16a34a);
+        color: white;
+        border-radius: 18px;
+        padding: 28px;
+        margin-bottom: 20px;
+        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.16);
+      }
+      .hero h2 {
+        font-size: 34px;
+        margin-bottom: 8px;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 390px;
+        gap: 20px;
+        align-items: start;
+      }
+      .panel {
+        background: white;
+        border: 1px solid #dbe5dc;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.09);
+      }
+      .panel h2 {
+        color: #14532d;
+        margin-bottom: 14px;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+        color: #475569;
+        font-weight: 800;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 12px;
+        font: inherit;
+      }
+      textarea {
+        min-height: 84px;
+        resize: vertical;
+        grid-column: 1 / -1;
+      }
+      .summary {
+        display: grid;
+        gap: 11px;
+      }
+      .line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        color: #475569;
+      }
+      .line strong {
+        color: #14532d;
+      }
+      .total {
+        border-top: 1px solid #e2e8f0;
+        padding-top: 12px;
+        font-size: 21px;
+        font-weight: 900;
+        color: #111827;
+      }
+      .status {
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 900;
+        background: #ecfdf5;
+        color: #14532d;
+      }
+      .status.warning {
+        background: #fff7ed;
+        color: #9a3412;
+      }
+      .status.danger {
+        background: #fef2f2;
+        color: #991b1b;
+      }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      button {
+        border: 0;
+        border-radius: 10px;
+        padding: 13px 14px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .primary {
+        background: #f59e0b;
+        color: #201400;
+      }
+      .secondary {
+        background: #14532d;
+        color: white;
+      }
+      .records {
+        margin-top: 20px;
+        display: grid;
+        gap: 12px;
+      }
+      .record {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 14px;
+        display: grid;
+        gap: 6px;
+      }
+      .empty {
+        color: #64748b;
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 16px;
+      }
+      @media (max-width: 900px) {
+        .layout,
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        textarea {
+          grid-column: auto;
+        }
+      }
+    </style>
+      <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="top">
+        <h1><i class="fa-solid fa-file-invoice"></i> Rental Billing</h1>
+        <nav class="nav">
+          <a href="../Services/eqipmentrental.html"
+            ><i class="fa-solid fa-tractor"></i> Equipment</a
+          >
+          <a href="../Dashboard/main.html"><i class="fa-solid fa-house"></i> Home</a>
+        </nav>
+      </div>
+
+      <section class="hero">
+        <h2>Billing, Deposit & Rental Case Handling</h2>
+        <p>
+          Calculate rent, GST, security deposit, late return penalty, damage
+          case and lost equipment settlement.
+        </p>
+      </section>
+
+      <section class="layout">
+        <form class="panel" id="billingForm">
+          <h2>Rental Details</h2>
+          <div class="form-grid">
+            <label>Booking ID<input id="bookingId" readonly /></label>
+            <label>Equipment Name<input id="equipmentName" required /></label>
+            <label>Location<input id="equipmentPlace" required /></label>
+            <label
+              >Rent per day<input
+                id="rentPerDay"
+                type="number"
+                min="1"
+                required
+            /></label>
+            <label
+              >Rental days<input
+                id="rentalDays"
+                type="number"
+                min="1"
+                value="1"
+                required
+            /></label>
+            <label
+              >Late days<input id="lateDays" type="number" min="0" value="0"
+            /></label>
+            <label
+              >Case type<select id="caseType">
+                <option value="normal">Normal return</option>
+                <option value="late">Late return</option>
+                <option value="minorDamage">Minor damage</option>
+                <option value="majorDamage">Major damage</option>
+                <option value="lost">Equipment lost</option>
+              </select></label
+            >
+            <label
+              >Payment status<select id="paymentStatus">
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="partial">Partial</option>
+              </select></label
+            >
+            <textarea
+              id="caseNote"
+              placeholder="Case note / owner remark"
+            ></textarea>
+          </div>
+          <div class="actions">
+            <button class="primary" type="button" id="calculateBtn">
+              <i class="fa-solid fa-calculator"></i> Calculate
+            </button>
+            <button class="secondary" type="submit">
+              <i class="fa-solid fa-floppy-disk"></i> Save Bill
+            </button>
+          </div>
+        </form>
+
+        <aside class="panel">
+          <h2>Bill Summary</h2>
+          <div class="summary" id="billSummary"></div>
+        </aside>
+      </section>
+
+      <section class="panel records">
+        <h2>Saved Rental Bills</h2>
+        <div id="recordsList"></div>
+      </section>
+    </main>
+
+    <script>
+      const bookings =
+        JSON.parse(localStorage.getItem("smartEquipmentBookings")) || [];
+      const params = new URLSearchParams(location.search);
+      const selectedId = params.get("booking");
+      const selected = bookings.find((item) => item.id === selectedId) ||
+        bookings[0] || {
+          id: `EQ-${Date.now()}`,
+          name: "Mini Tractor",
+          price: 2500,
+          place: "Patna",
+          category: "Tractor",
+        };
+
+      const fields = {
+        bookingId: document.getElementById("bookingId"),
+        equipmentName: document.getElementById("equipmentName"),
+        equipmentPlace: document.getElementById("equipmentPlace"),
+        rentPerDay: document.getElementById("rentPerDay"),
+        rentalDays: document.getElementById("rentalDays"),
+        lateDays: document.getElementById("lateDays"),
+        caseType: document.getElementById("caseType"),
+        paymentStatus: document.getElementById("paymentStatus"),
+        caseNote: document.getElementById("caseNote"),
+      };
+      const billSummary = document.getElementById("billSummary");
+      const recordsList = document.getElementById("recordsList");
+
+      function money(value) {
+        return `Rs ${Math.round(value).toLocaleString("en-IN")}`;
+      }
+
+      function loadBooking() {
+        fields.bookingId.value = selected.id;
+        fields.equipmentName.value = selected.name;
+        fields.equipmentPlace.value = selected.place;
+        fields.rentPerDay.value = selected.price;
+      }
+
+      function calculateBill() {
+        const rent = Number(fields.rentPerDay.value) || 0;
+        const days = Number(fields.rentalDays.value) || 1;
+        const lateDays = Number(fields.lateDays.value) || 0;
+        const baseRent = rent * days;
+        const deposit = Math.round(rent * 0.5);
+        const lateFee = lateDays * Math.round(rent * 0.25);
+        const caseType = fields.caseType.value;
+        const damageFee =
+          caseType === "minorDamage"
+            ? Math.round(rent * 0.4)
+            : caseType === "majorDamage"
+              ? Math.round(rent * 1.5)
+              : caseType === "lost"
+                ? Math.round(rent * 5)
+                : 0;
+        const gst = Math.round((baseRent + lateFee + damageFee) * 0.18);
+        const total = baseRent + deposit + lateFee + damageFee + gst;
+        const statusClass =
+          caseType === "lost" || caseType === "majorDamage"
+            ? "danger"
+            : lateDays > 0 || caseType !== "normal"
+              ? "warning"
+              : "";
+        const statusText =
+          caseType === "normal" && lateDays === 0
+            ? "Normal rental case"
+            : caseType === "lost"
+              ? "Lost equipment settlement"
+              : caseType === "majorDamage"
+                ? "Major damage case"
+                : "Penalty / damage review needed";
+
+        billSummary.innerHTML = `
+          <div class="status ${statusClass}">${statusText}</div>
+          <div class="line"><span>Base rent (${days} days)</span><strong>${money(baseRent)}</strong></div>
+          <div class="line"><span>Security deposit</span><strong>${money(deposit)}</strong></div>
+          <div class="line"><span>Late fee (${lateDays} days)</span><strong>${money(lateFee)}</strong></div>
+          <div class="line"><span>Damage / lost charge</span><strong>${money(damageFee)}</strong></div>
+          <div class="line"><span>GST 18%</span><strong>${money(gst)}</strong></div>
+          <div class="line total"><span>Total payable</span><strong>${money(total)}</strong></div>
+        `;
+        return {
+          baseRent,
+          deposit,
+          lateFee,
+          damageFee,
+          gst,
+          total,
+          statusText,
+        };
+      }
+
+      function saveBill(event) {
+        event.preventDefault();
+        const bill = calculateBill();
+        const records =
+          JSON.parse(localStorage.getItem("smartRentalBills")) || [];
+        const record = {
+          billId: `BILL-${Date.now()}`,
+          bookingId: fields.bookingId.value,
+          equipmentName: fields.equipmentName.value,
+          place: fields.equipmentPlace.value,
+          rentPerDay: Number(fields.rentPerDay.value),
+          rentalDays: Number(fields.rentalDays.value),
+          lateDays: Number(fields.lateDays.value),
+          caseType: fields.caseType.value,
+          paymentStatus: fields.paymentStatus.value,
+          caseNote: fields.caseNote.value,
+          ...bill,
+          createdAt: new Date().toISOString(),
+        };
+        records.unshift(record);
+        localStorage.setItem("smartRentalBills", JSON.stringify(records));
+        renderRecords();
+        if (window.showSmartPopup)
+          window.showSmartPopup(
+            "success",
+            "Bill Saved",
+            `${record.equipmentName} bill saved successfully.`,
+          );
+        else alert("Bill saved successfully.");
+      }
+
+      function renderRecords() {
+        const records =
+          JSON.parse(localStorage.getItem("smartRentalBills")) || [];
+        if (!records.length) {
+          recordsList.innerHTML =
+            '<div class="empty">No rental bill saved yet.</div>';
+          return;
+        }
+        recordsList.innerHTML = records
+          .map(
+            (item) => `
+          <article class="record">
+            <strong>${item.billId} - ${item.equipmentName}</strong>
+            <span>${item.statusText} | Payment: ${item.paymentStatus}</span>
+            <span>Total: ${money(item.total)} | Booking: ${item.bookingId}</span>
+          </article>
+        `,
+          )
+          .join("");
+      }
+
+      document
+        .getElementById("calculateBtn")
+        .addEventListener("click", calculateBill);
+      document
+        .getElementById("billingForm")
+        .addEventListener("submit", saveBill);
+      [
+        fields.rentPerDay,
+        fields.rentalDays,
+        fields.lateDays,
+        fields.caseType,
+      ].forEach((field) => field.addEventListener("input", calculateBill));
+      loadBooking();
+      calculateBill();
+      renderRecords();
+    </script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+

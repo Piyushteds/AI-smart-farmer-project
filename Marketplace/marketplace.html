@@ -1,0 +1,224 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Farmer Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="marketplace.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314532d'/%3E%3Cpath d='M32 51c-8-9-15-18-15-29 10 0 16 5 18 14 3-7 8-11 16-12-1 16-8 25-19 27Z' fill='%23dcfce7'/%3E%3Cpath d='M31 50c2-12 5-22 13-30' stroke='%23facc15' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <script src="../Shared/auth.js"></script>
+  <script src="../Shared/role-ui.js"></script>
+  <script src="../Shared/role-content.js"></script>
+      <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">
+          <i class="fa-solid fa-store"></i> Smart Farmer Market
+        </div>
+        <div class="top-links">
+          <a href="../Dashboard/main.html"><i class="fa-solid fa-house"></i> Home</a
+          ><a data-roles="farmer,user,admin" href="../Weather/weather.html"
+            ><i class="fa-solid fa-cloud-sun"></i> Weather</a
+          ><a data-roles="farmer,admin" href="../Services/diseaseupload.html"
+            ><i class="fa-solid fa-leaf"></i> Disease</a
+          ><a data-roles="farmer,vendor,admin" href="../Services/eqipmentrental.html"
+            ><i class="fa-solid fa-tractor"></i> Equipment</a
+          ><a data-roles="farmer,vendor,user,admin" href="../Services/expertconsulation.html"
+            ><i class="fa-solid fa-user-doctor"></i> Experts</a
+          >
+        </div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <h1>Buy farm inputs and rent useful tools</h1>
+          <p>
+            Seeds, fertilizers, equipment, irrigation tools, and trusted local
+            sellers in one simple marketplace.
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span>Cart Total</span><strong id="cartTotal">Rs 0</strong
+            ><small id="cartCount">0 items selected</small>
+          </div>
+          <div class="stat">
+            <span>Wishlist</span><strong id="wishlistCount">0</strong
+            ><small>saved products</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="quick-actions" id="quickActions">
+        <button class="chip active" data-category="all">All</button>
+        <button class="chip" data-category="Seeds">Seeds</button>
+        <button class="chip" data-category="Fertilizer">Fertilizer</button>
+        <button class="chip" data-category="Equipment">Equipment</button>
+        <button class="chip" data-category="Tools">Tools</button>
+        <button class="chip" data-category="Irrigation">Irrigation</button>
+      </section>
+
+      <section class="toolbar">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Search seeds, tools, fertilizer..."
+        />
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="Seeds">Seeds</option>
+          <option value="Fertilizer">Fertilizer</option>
+          <option value="Equipment">Equipment</option>
+          <option value="Tools">Tools</option>
+          <option value="Irrigation">Irrigation</option>
+        </select>
+        <select id="sortSelect">
+          <option value="featured">Featured</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+        <button id="clearCart">
+          <i class="fa-solid fa-trash"></i> Clear Cart
+        </button>
+      </section>
+
+      <section class="layout">
+        <section class="grid" id="productGrid"></section>
+        <aside class="side-panel">
+          <section class="cart-box" id="cartBox">
+            <h2>Selected Items</h2>
+            <div id="cartItems"></div>
+            <div id="cartSummary"></div>
+          </section>
+          <section class="checkout-box">
+            <h2>Checkout & Payment</h2>
+            <form class="checkout-form" id="checkoutForm">
+              <input id="farmerName" placeholder="Farmer name" required />
+              <input id="farmerPhone" placeholder="Mobile number" required />
+              <textarea
+                id="farmerAddress"
+                placeholder="Village / delivery address"
+                required
+              ></textarea>
+              <select id="paymentMethod" required>
+                <option value="upi">UPI Payment</option>
+                <option value="card">Debit / Credit Card</option>
+                <option value="cod">Cash on Delivery</option>
+              </select>
+              <button type="submit">
+                <i class="fa-solid fa-credit-card"></i> Proceed to Payment
+              </button>
+            </form>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <div class="modal" id="productModal" aria-hidden="true">
+      <div class="modal-card">
+        <img class="modal-image" id="modalImage" alt="Product image" />
+        <div class="modal-body">
+          <div class="modal-head">
+            <div>
+              <span class="category" id="modalCategory"></span>
+              <h2 id="modalTitle"></h2>
+            </div>
+            <button class="close-modal" id="closeModal" type="button">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <p id="modalDescription"></p>
+          <p id="modalSeller"></p>
+          <strong id="modalPrice"></strong>
+          <button class="buy-btn" id="modalAdd" type="button">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal payment-modal" id="paymentModal" aria-hidden="true">
+      <div class="modal-card payment-card">
+        <div class="payment-head">
+          <div>
+            <span class="category">Secure Checkout</span>
+            <h2>Complete Payment</h2>
+            <p id="paymentOrderText">Order summary loading...</p>
+          </div>
+          <button class="close-modal" id="closePaymentModal" type="button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="payment-summary" id="paymentSummary"></div>
+
+        <form id="paymentForm" class="payment-form">
+          <div class="payment-methods">
+            <label><input type="radio" name="payMode" value="upi" checked /> UPI</label>
+            <label><input type="radio" name="payMode" value="card" /> Card</label>
+            <label><input type="radio" name="payMode" value="cod" /> COD</label>
+          </div>
+
+          <div class="payment-fields" id="upiFields">
+            <div class="upi-scanner">
+              <img id="upiQrImage" alt="UPI QR scanner" />
+              <div>
+                <h3>Scan & Pay</h3>
+                <p id="upiQrText">Scan this QR using any UPI app, then enter your UPI ID below.</p>
+              </div>
+            </div>
+            <input id="upiId" placeholder="Enter UPI ID (example: farmer@upi)" />
+          </div>
+
+          <div class="payment-fields hidden" id="cardFields">
+            <input id="cardName" placeholder="Card holder name" />
+            <input id="cardNumber" placeholder="Card number" maxlength="19" />
+            <div class="split-fields">
+              <input id="cardExpiry" placeholder="MM/YY" maxlength="5" />
+              <input id="cardCvv" placeholder="CVV" maxlength="3" />
+            </div>
+          </div>
+
+          <div class="payment-fields hidden" id="codFields">
+            <p class="cod-note">Cash on Delivery selected. Order payment status will be pending until delivery.</p>
+          </div>
+
+          <button class="pay-now-btn" type="submit">
+            <i class="fa-solid fa-lock"></i> Pay Now
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="toast" id="toast">Added to cart</div>
+    <script src="marketplace.js"></script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

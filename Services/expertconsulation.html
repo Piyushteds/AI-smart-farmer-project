@@ -1,0 +1,313 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Farmer Expert Consultation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        background: #fffaf0;
+        color: #17210f;
+      }
+      .wrap {
+        max-width: 1150px;
+        margin: auto;
+        padding: 28px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+      .back {
+        background: #14532d;
+        color: white;
+        text-decoration: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      .hero {
+        background: linear-gradient(135deg, #0f5132, #22c55e);
+        color: white;
+        border-radius: 8px;
+        padding: 32px;
+        margin-bottom: 22px;
+      }
+      .hero h1 {
+        font-size: 34px;
+        margin-bottom: 8px;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 1.4fr 0.9fr;
+        gap: 22px;
+      }
+      .experts {
+        display: grid;
+        gap: 16px;
+      }
+      .expert {
+        background: white;
+        border-radius: 8px;
+        padding: 18px;
+        display: grid;
+        grid-template-columns: 72px 1fr auto;
+        gap: 16px;
+        align-items: center;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
+      }
+      .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #dcfce7;
+        color: #14532d;
+        font-size: 30px;
+      }
+      .expert h3 {
+        color: #14532d;
+      }
+      .tag {
+        display: inline-block;
+        background: #fef3c7;
+        color: #92400e;
+        padding: 5px 10px;
+        border-radius: 999px;
+        margin-top: 8px;
+        font-size: 13px;
+      }
+      .call {
+        border: 0;
+        background: #f59e0b;
+        padding: 11px 16px;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .form {
+        background: white;
+        border-radius: 8px;
+        padding: 22px;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
+      }
+      .field {
+        display: grid;
+        gap: 7px;
+        margin-top: 14px;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .field textarea {
+        min-height: 95px;
+      }
+      .submit {
+        width: 100%;
+        border: 0;
+        background: #14532d;
+        color: white;
+        padding: 13px;
+        border-radius: 8px;
+        font-weight: 800;
+        margin-top: 16px;
+        cursor: pointer;
+      }
+      .status {
+        display: none;
+        margin-top: 14px;
+        padding: 13px;
+        background: #ecfdf5;
+        border-radius: 8px;
+        color: #14532d;
+      }
+      @media (max-width: 820px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .expert {
+          grid-template-columns: 64px 1fr;
+        }
+        .call {
+          grid-column: 1/-1;
+        }
+        .top {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+      .quick-nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: -8px 0 22px;
+      }
+      .quick-nav a {
+        background: #e2e8f0;
+        color: #14532d;
+        text-decoration: none;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-weight: 800;
+      }
+      .quick-nav a:hover {
+        background: #14532d;
+        color: white;
+      }
+    </style>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314532d'/%3E%3Cpath d='M32 51c-8-9-15-18-15-29 10 0 16 5 18 14 3-7 8-11 16-12-1 16-8 25-19 27Z' fill='%23dcfce7'/%3E%3Cpath d='M31 50c2-12 5-22 13-30' stroke='%23facc15' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <script src="../Shared/auth.js"></script>
+    <script src="../Shared/role-ui.js"></script>
+    <script src="../Shared/role-content.js"></script>
+      <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="top">
+        <h2><i class="fa-solid fa-user-doctor"></i> Expert Consultation</h2>
+        <a class="back" href="../Dashboard/main.html"
+          ><i class="fa-solid fa-arrow-left"></i> Back Home</a
+        >
+      </div>
+      <nav class="quick-nav">
+        <a href="../Dashboard/main.html"><i class="fa-solid fa-house"></i> Home</a
+        ><a data-roles="farmer,vendor,user,admin" href="../Marketplace/marketplace.html"
+          ><i class="fa-solid fa-store"></i> Marketplace</a
+        ><a data-roles="farmer,user,admin" href="../Weather/weather.html"
+          ><i class="fa-solid fa-cloud-sun"></i> Weather</a
+        ><a data-roles="farmer,admin" href="../Services/diseaseupload.html"
+          ><i class="fa-solid fa-leaf"></i> Disease</a
+        ><a data-roles="farmer,vendor,admin" href="../Services/eqipmentrental.html"
+          ><i class="fa-solid fa-tractor"></i> Equipment</a
+        ><a data-roles="farmer,vendor,user,admin" href="../Services/expertconsulation.html"
+          ><i class="fa-solid fa-user-doctor"></i> Experts</a
+        ><a data-roles="farmer,vendor,user,admin" href="../Loginpage/login.html"
+          ><i class="fa-solid fa-right-to-bracket"></i> Login</a
+        >
+      </nav>
+      <section class="hero">
+        <h1>Talk to Agriculture Experts</h1>
+        <p>
+          Get crop, soil, fertilizer, disease, and irrigation advice from
+          specialists.
+        </p>
+      </section>
+      <section class="layout">
+        <div class="experts" id="experts"></div>
+        <form class="form" id="consultForm">
+          <h2>Book Consultation</h2>
+          <div class="field">
+            <label>Your Name</label
+            ><input id="name" required placeholder="Farmer name" />
+          </div>
+          <div class="field">
+            <label>Mobile Number</label
+            ><input id="phone" required placeholder="10 digit number" />
+          </div>
+          <div class="field">
+            <label>Topic</label
+            ><select id="topic">
+              <option>Crop Disease</option>
+              <option>Soil Health</option>
+              <option>Irrigation</option>
+              <option>Market Price</option>
+              <option>Fertilizer Plan</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Problem Details</label
+            ><textarea
+              id="message"
+              placeholder="Describe your farming problem"
+            ></textarea>
+          </div>
+          <button class="submit" type="submit">
+            <i class="fa-solid fa-calendar-check"></i> Request Booking
+          </button>
+          <div class="status" id="status">
+            Consultation request saved. Expert will contact you soon.
+          </div>
+        </form>
+      </section>
+    </main>
+    <script>
+      const experts = [
+        {
+          name: "Dr. Anil Kumar",
+          spec: "Crop Disease Specialist",
+          exp: "12 years",
+          mode: "Video / Phone",
+        },
+        {
+          name: "Priya Singh",
+          spec: "Soil and Fertilizer Advisor",
+          exp: "8 years",
+          mode: "Phone",
+        },
+        {
+          name: "Rahul Verma",
+          spec: "Irrigation Expert",
+          exp: "10 years",
+          mode: "Video",
+        },
+        {
+          name: "Neha Sharma",
+          spec: "Organic Farming Mentor",
+          exp: "7 years",
+          mode: "Chat / Phone",
+        },
+      ];
+      const expertsEl = document.getElementById("experts");
+      expertsEl.innerHTML = experts
+        .map(
+          (e, i) =>
+            `<article class="expert"><div class="avatar"><i class="fa-solid fa-user-tie"></i></div><div><h3>${e.name}</h3><p>${e.spec}</p><span class="tag">${e.exp} experience</span> <span class="tag">${e.mode}</span></div><button class="call" data-topic="${e.spec}">Select</button></article>`,
+        )
+        .join("");
+      expertsEl.addEventListener("click", (e) => {
+        if (e.target.classList.contains("call"))
+          document.getElementById("topic").value =
+            e.target.dataset.topic.includes("Soil")
+              ? "Soil Health"
+              : e.target.dataset.topic.includes("Irrigation")
+                ? "Irrigation"
+                : e.target.dataset.topic.includes("Organic")
+                  ? "Fertilizer Plan"
+                  : "Crop Disease";
+      });
+      document.getElementById("consultForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        document.getElementById("status").style.display = "block";
+        e.target.reset();
+      });
+    </script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+

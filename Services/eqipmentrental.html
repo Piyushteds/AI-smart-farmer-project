@@ -1,0 +1,526 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Farmer Equipment Rental</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 8% 0%,
+            rgba(22, 163, 74, 0.16),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 92% 12%,
+            rgba(245, 158, 11, 0.16),
+            transparent 28%
+          ),
+          linear-gradient(135deg, #f8fafc 0%, #eef7ed 48%, #fefce8 100%);
+        color: #102016;
+      }
+      .wrap {
+        max-width: 1180px;
+        margin: auto;
+        padding: 28px;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+      .back {
+        background: #14532d;
+        color: white;
+        text-decoration: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        background: #14532d;
+        color: white;
+        border-radius: 18px;
+        padding: 34px;
+        margin-bottom: 24px;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.16),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: shine 5s ease-in-out infinite;
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+      .hero h1 {
+        font-size: 42px;
+        margin-bottom: 8px;
+      }
+      .hero i {
+        font-size: 72px;
+        color: #facc15;
+      }
+      .filters {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .filters input,
+      .filters select {
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        min-width: 210px;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+        overflow: hidden;
+        border: 1px solid rgba(219, 229, 220, 0.85);
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease,
+          border-color 0.24s ease;
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(22, 163, 74, 0.45);
+        box-shadow: 0 20px 38px rgba(15, 23, 42, 0.16);
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(22, 163, 74, 0.45);
+        box-shadow: 0 20px 38px rgba(15, 23, 42, 0.16);
+      }
+      .card img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+      }
+      .body {
+        padding: 18px;
+      }
+      .body h3 {
+        margin-bottom: 8px;
+        color: #14532d;
+      }
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        margin: 12px 0;
+        color: #475569;
+      }
+      .book {
+        width: 100%;
+        border: 0;
+        background: linear-gradient(135deg, #f59e0b, #facc15);
+        padding: 13px;
+        border-radius: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .book:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(245, 158, 11, 0.28);
+      }
+      .summary {
+        margin-top: 22px;
+        background: #ecfdf5;
+        border-radius: 8px;
+        padding: 18px;
+        display: none;
+        border-left: 5px solid #16a34a;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 620px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .top {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+      .quick-nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: -8px 0 22px;
+      }
+      .quick-nav a {
+        background: #e2e8f0;
+        color: #14532d;
+        text-decoration: none;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-weight: 800;
+      }
+      .quick-nav a:hover {
+        background: #14532d;
+        color: white;
+      }
+      .rental-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin: 0 0 22px;
+      }
+      .rental-strip article {
+        background: white;
+        border: 1px solid rgba(219, 229, 220, 0.86);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      }
+      .rental-strip i {
+        color: #16a34a;
+        font-size: 22px;
+        margin-bottom: 9px;
+      }
+      .rental-strip strong {
+        display: block;
+        color: #14532d;
+      }
+      .rental-strip small {
+        color: #64748b;
+        font-weight: 700;
+      }
+      @keyframes shine {
+        0%,
+        55% {
+          transform: translateX(-100%);
+        }
+        75%,
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      @media (max-width: 900px) {
+        .rental-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 620px) {
+        .rental-strip {
+          grid-template-columns: 1fr;
+        }
+      }
+      .rental-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin: 0 0 22px;
+      }
+      .rental-strip article {
+        background: white;
+        border: 1px solid rgba(219, 229, 220, 0.86);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      }
+      .rental-strip i {
+        color: #16a34a;
+        font-size: 22px;
+        margin-bottom: 9px;
+      }
+      .rental-strip strong {
+        display: block;
+        color: #14532d;
+      }
+      .rental-strip small {
+        color: #64748b;
+        font-weight: 700;
+      }
+      @keyframes shine {
+        0%,
+        55% {
+          transform: translateX(-100%);
+        }
+        75%,
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      @media (max-width: 900px) {
+        .rental-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 620px) {
+        .rental-strip {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314532d'/%3E%3Cpath d='M32 51c-8-9-15-18-15-29 10 0 16 5 18 14 3-7 8-11 16-12-1 16-8 25-19 27Z' fill='%23dcfce7'/%3E%3Cpath d='M31 50c2-12 5-22 13-30' stroke='%23facc15' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <script src="../Shared/auth.js"></script>
+    <script src="../Shared/role-ui.js"></script>
+    <script src="../Shared/role-content.js"></script>
+      <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="top">
+        <h2><i class="fa-solid fa-tractor"></i> Equipment Rental</h2>
+        <a class="back" href="../Dashboard/main.html"
+          ><i class="fa-solid fa-arrow-left"></i> Back Home</a
+        >
+      </div>
+      <nav class="quick-nav">
+        <a href="../Dashboard/main.html"><i class="fa-solid fa-house"></i> Home</a
+        ><a data-roles="farmer,vendor,user,admin" href="../Marketplace/marketplace.html"
+          ><i class="fa-solid fa-store"></i> Marketplace</a
+        ><a data-roles="farmer,user,admin" href="../Weather/weather.html"
+          ><i class="fa-solid fa-cloud-sun"></i> Weather</a
+        ><a data-roles="farmer,admin" href="../Services/diseaseupload.html"
+          ><i class="fa-solid fa-leaf"></i> Disease</a
+        ><a data-roles="farmer,vendor,admin" href="../Services/eqipmentrental.html"
+          ><i class="fa-solid fa-tractor"></i> Equipment</a
+        ><a data-roles="farmer,vendor,user,admin" href="../Services/expertconsulation.html"
+          ><i class="fa-solid fa-user-doctor"></i> Experts</a
+        ><a data-roles="farmer,vendor,admin" href="../Services/equipmentbilling.html"
+          ><i class="fa-solid fa-file-invoice"></i> Rental Billing</a
+        >
+      </nav>
+      <section class="hero">
+        <div>
+          <h1>Rent Farm Equipment</h1>
+          <p>
+            Book tractors, sprayers, pumps, and harvesters for your field work.
+          </p>
+        </div>
+        <i class="fa-solid fa-screwdriver-wrench"></i>
+      </section>
+      <section class="rental-strip">
+        <article>
+          <i class="fa-solid fa-file-invoice"></i><strong>Auto Billing</strong
+          ><small>Rent, deposit, GST</small>
+        </article>
+        <article>
+          <i class="fa-solid fa-shield-halved"></i><strong>Damage Case</strong
+          ><small>Repair charges handled</small>
+        </article>
+        <article>
+          <i class="fa-solid fa-clock"></i><strong>Late Return</strong
+          ><small>Penalty calculation</small>
+        </article>
+        <article>
+          <i class="fa-solid fa-receipt"></i><strong>Receipt</strong
+          ><small>Saved rental record</small>
+        </article>
+      </section>
+
+      <div class="filters">
+        <input id="search" placeholder="Search equipment" /><select
+          id="category"
+        >
+          <option value="all">All Categories</option>
+          <option>Tractor</option>
+          <option>Sprayer</option>
+          <option>Harvester</option>
+          <option>Pump</option>
+        </select>
+      </div>
+      <section class="grid" id="equipmentGrid"></section>
+      <section class="summary" id="summary"></section>
+    </main>
+    <script>
+      function svgData(svg) {
+        return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+      }
+      function equipmentFallbackImage(cat, name) {
+        const color =
+          cat === "Tractor"
+            ? "#16a34a"
+            : cat === "Sprayer"
+              ? "#0284c7"
+              : cat === "Pump"
+                ? "#2563eb"
+                : "#f59e0b";
+        return svgData(`
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+            <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ecfdf5"/><stop offset="1" stop-color="${color}"/></linearGradient></defs>
+            <rect width="900" height="560" fill="url(#g)"/>
+            <circle cx="730" cy="120" r="125" fill="rgba(255,255,255,.22)"/>
+            <rect x="175" y="215" width="440" height="120" rx="24" fill="#14532d"/>
+            <circle cx="285" cy="370" r="70" fill="#111827"/><circle cx="285" cy="370" r="34" fill="#facc15"/>
+            <circle cx="590" cy="370" r="58" fill="#111827"/><circle cx="590" cy="370" r="28" fill="#facc15"/>
+            <rect x="505" y="150" width="155" height="90" rx="18" fill="rgba(255,255,255,.82)"/>
+            <text x="450" y="105" text-anchor="middle" font-family="Arial" font-size="44" font-weight="900" fill="#123524">${name}</text>
+            <text x="450" y="485" text-anchor="middle" font-family="Arial" font-size="30" font-weight="800" fill="#123524">Smart Farmer ${cat}</text>
+          </svg>
+        `);
+      }
+      const equipment = [
+        {
+          name: "Mini Tractor",
+          cat: "Tractor",
+          price: 2500,
+          place: "Patna",
+          img: "https://images.unsplash.com/photo-1605333202604-c5c5652964a9?auto=format&fit=crop&w=900",
+        },
+        {
+          name: "Crop Sprayer",
+          cat: "Sprayer",
+          price: 700,
+          place: "Ranchi",
+          img: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=900",
+        },
+        {
+          name: "Water Pump",
+          cat: "Pump",
+          price: 500,
+          place: "Gaya",
+          img: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900",
+        },
+        {
+          name: "Combine Harvester",
+          cat: "Harvester",
+          price: 5200,
+          place: "Muzaffarpur",
+          img: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=900",
+        },
+        {
+          name: "Rotavator",
+          cat: "Tractor",
+          price: 1200,
+          place: "Nalanda",
+          img: "https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?auto=format&fit=crop&w=900",
+        },
+        {
+          name: "Power Tiller",
+          cat: "Tractor",
+          price: 1800,
+          place: "Bhagalpur",
+          img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900",
+        },
+      ];
+      const grid = document.getElementById("equipmentGrid");
+      const search = document.getElementById("search");
+      const category = document.getElementById("category");
+      const summary = document.getElementById("summary");
+      function render() {
+        const term = search.value.toLowerCase();
+        const cat = category.value;
+        grid.innerHTML = equipment
+          .filter(
+            (item) =>
+              (cat === "all" || item.cat === cat) &&
+              item.name.toLowerCase().includes(term),
+          )
+          .map(
+            (item) => `
+        <article class="card"><img src="${item.img}" alt="${item.name}" onerror="this.onerror=null; this.src=equipmentFallbackImage(\`${item.cat}\`, \`${item.name}\`);"><div class="body"><h3>${item.name}</h3><p>${item.cat} available in ${item.place}</p><div class="meta"><b>Rs ${item.price}/day</b><span>Available</span></div><button class="book" type="button" data-name="${item.name}" data-price="${item.price}" data-place="${item.place}" data-cat="${item.cat}"><i class="fa-solid fa-calendar-check"></i> Book Now</button></div></article>
+      `,
+          )
+          .join("");
+      }
+      grid.addEventListener("click", (e) => {
+        const button = e.target.closest(".book");
+        if (!button) return;
+
+        const booking = {
+          id: `EQ-${Date.now()}`,
+          name: button.dataset.name,
+          price: Number(button.dataset.price),
+          place: button.dataset.place,
+          category: button.dataset.cat,
+          status: "pending",
+          createdAt: new Date().toISOString(),
+        };
+        const bookings =
+          JSON.parse(localStorage.getItem("smartEquipmentBookings")) || [];
+        bookings.unshift(booking);
+        localStorage.setItem(
+          "smartEquipmentBookings",
+          JSON.stringify(bookings),
+        );
+
+        summary.style.display = "block";
+        summary.innerHTML = `
+          <h3><i class="fa-solid fa-circle-check"></i> Booking Selected</h3>
+          <p><b>${booking.name}</b> booking request created at <b>Rs ${booking.price}/day</b>.</p>
+          <p>Location: ${booking.place} | Booking ID: ${booking.id}</p>
+          <p>Owner will contact you soon for date and delivery confirmation.</p>
+        `;
+        summary.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(() => {
+          window.location.href = `equipmentbilling.html?booking=${booking.id}`;
+        }, 650);
+
+        if (window.showSmartPopup) {
+          window.showSmartPopup(
+            "success",
+            "Equipment Booked",
+            `${booking.name} request created successfully.`,
+          );
+        } else {
+          alert(`${booking.name} booking request created successfully.`);
+        }
+      });
+      search.addEventListener("input", render);
+      category.addEventListener("change", render);
+      render();
+    </script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+
+
