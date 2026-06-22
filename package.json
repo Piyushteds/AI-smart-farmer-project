@@ -1,0 +1,16 @@
+{
+    "name": "smart-farmer-project",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Smart Farmer project with Node.js, Express.js, and secure AI chatbot backend.",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js",
+        "check": "node --check server.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^4.19.2"
+    }
+}
