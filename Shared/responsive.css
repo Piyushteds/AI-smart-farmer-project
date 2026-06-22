@@ -1,0 +1,770 @@
+﻿/* Shared mobile responsiveness for Smart Farmer project */
+html { overflow-x: hidden; }
+body { overflow-x: hidden; }
+img, video, canvas { max-width: 100%; }
+
+@media (max-width: 900px) {
+  .content,
+  .app,
+  .market-page,
+  .page,
+  .container,
+  main {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .nav,
+  .quick-nav,
+  .side-nav,
+  .header nav,
+  .top-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+}
+
+@media (max-width: 720px) {
+  body { font-size: 15px; }
+
+  .content,
+  .app,
+  .market-page,
+  .page,
+  .container,
+  main {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  h1 { font-size: clamp(28px, 9vw, 38px) !important; line-height: 1.1 !important; }
+  h2 { font-size: clamp(21px, 6vw, 28px) !important; }
+  h3 { font-size: clamp(17px, 5vw, 22px) !important; }
+
+  .hero,
+  .hero-section,
+  .market-hero,
+  .weather-layout,
+  .dashboard-row,
+  .role-dashboard,
+  .feature-grid,
+  .stats-grid,
+  .grid,
+  .cards,
+  .products-grid,
+  .equipment-grid,
+  .weather-visuals,
+  .weather-gallery,
+  .city-weather-note {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero,
+  .market-hero,
+  .weather-summary {
+    min-height: auto !important;
+    padding: 20px !important;
+    border-radius: 14px !important;
+  }
+
+  .hero-actions,
+  .actions,
+  .filters,
+  .toolbar,
+  .form-row,
+  .role-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100%;
+  }
+
+  .btn,
+  button,
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+
+  .btn,
+  .primary-btn,
+  .secondary-btn,
+  .hero-actions a,
+  .role-actions a {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sidebar {
+    position: static !important;
+    width: 100% !important;
+    max-height: none !important;
+    border-radius: 0 0 18px 18px;
+  }
+
+  .content {
+    margin-left: 0 !important;
+  }
+
+  body.sidebar-collapsed .content {
+    margin-left: 0 !important;
+  }
+
+  .sidebar-tools,
+  body.sidebar-collapsed .sidebar-tools {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.sidebar-collapsed .brand > span:last-child,
+  body.sidebar-collapsed .side-nav a,
+  body.sidebar-collapsed .side-footer a,
+  body.sidebar-collapsed #sidebarToggle span,
+  body.sidebar-collapsed #themeBtn span {
+    font-size: inherit !important;
+  }
+
+  body.sidebar-collapsed .side-nav a,
+  body.sidebar-collapsed .side-footer a {
+    justify-content: flex-start !important;
+  }
+
+  #chat .chat-box {
+    right: 10px !important;
+    left: 10px !important;
+    bottom: 86px !important;
+    width: auto !important;
+    max-width: none !important;
+    height: min(560px, calc(100vh - 108px)) !important;
+  }
+
+  #chat,
+  #chat .chat-container {
+    right: 14px !important;
+    bottom: 14px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .content,
+  .app,
+  .market-page,
+  .page,
+  .container,
+  main {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .card,
+  .feature-card,
+  .role-card,
+  .smart-device-card,
+  .advice-card,
+  .activity-card,
+  .panel,
+  .weather-alert-panel,
+  .visual-card,
+  .gallery-card {
+    border-radius: 12px !important;
+    padding: 14px !important;
+  }
+
+  .side-nav a,
+  .side-footer a {
+    min-height: 44px;
+  }
+
+  .chat-header h2 {
+    font-size: 16px !important;
+  }
+
+  #chat .chat-actions button {
+    width: 32px;
+    height: 32px;
+  }
+}
+/* Final small device polish */
+@media (max-width: 720px) {
+  .navbar,
+  .header,
+  .topbar,
+  .nav {
+    gap: 10px !important;
+  }
+
+  .navbar,
+  .header {
+    align-items: stretch !important;
+  }
+
+  .navbar a,
+  .nav a,
+  .quick-nav a {
+    white-space: nowrap;
+  }
+
+  form,
+  .login-card,
+  .checkout-panel,
+  .billing-form,
+  .panel {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100% !important;
+    min-height: 44px;
+    font-size: 16px !important;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .modal,
+  .payment-modal,
+  .dialog {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    margin: 12px !important;
+  }
+
+  .cart-row,
+  .summary-line,
+  .activity {
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 360px) {
+  body { font-size: 14px; }
+  .brand strong { font-size: 17px !important; }
+  .brand small { font-size: 10px !important; }
+  #chatIcon { width: 56px !important; height: 56px !important; }
+}
+/* Strong mobile responsive upgrade */
+* {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: flex !important;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    gap: 8px !important;
+    padding: 6px 0 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navbar {
+    position: sticky !important;
+    top: 0;
+    flex-wrap: wrap !important;
+    padding: 12px 14px !important;
+    backdrop-filter: blur(16px);
+  }
+
+  .logo,
+  .brand {
+    width: 100%;
+  }
+
+  .hero-content,
+  .why-wrapper,
+  .about-wrapper,
+  .cta-wrapper,
+  .footer-content,
+  .footer-bottom {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .hero-left,
+  .hero-right,
+  .why-left,
+  .why-right,
+  .about-left,
+  .about-right {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-left h1 {
+    font-size: clamp(36px, 12vw, 54px) !important;
+  }
+
+  .hero-left p,
+  .title p,
+  .about-left p,
+  .why-left p {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+
+  .hero-buttons {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .hero-buttons button,
+  .primary-btn,
+  .secondary-btn {
+    width: 100% !important;
+    min-height: 46px;
+  }
+
+  .dashboard,
+  .hero-right,
+  .glass-card,
+  .login-box {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .features-grid,
+  .pricing-grid,
+  .testimonial-grid,
+  .modules-grid,
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .market-layout,
+  .products-layout,
+  .shop-layout,
+  .checkout-grid,
+  .billing-grid,
+  .details-grid,
+  .summary-grid,
+  .payment-layout,
+  .modal-body {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .cart-box,
+  .checkout-box,
+  .summary-box,
+  .payment-box,
+  aside,
+  .sidebar-panel {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .product-grid,
+  .products,
+  #productGrid,
+  #equipmentGrid,
+  .equipment-list,
+  .market-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .card img,
+  .product-card img,
+  .modal-image,
+  .visual-card img,
+  .gallery-card img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 240px;
+    object-fit: cover;
+  }
+
+  .nav-row,
+  .quick-nav,
+  .top-nav,
+  .header nav {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+    padding-bottom: 8px;
+  }
+
+  .nav-row a,
+  .quick-nav a,
+  .top-nav a,
+  .header nav a {
+    flex: 0 0 auto;
+  }
+
+  .weather-scene,
+  .weather-summary,
+  .advice-card,
+  .forecast-card,
+  .weather-gallery-section {
+    width: 100% !important;
+  }
+
+  .info-grid,
+  .weather-stats,
+  .stats-row,
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .hourly-list,
+  .daily-list,
+  .forecast-list {
+    overflow-x: auto;
+    display: flex !important;
+    gap: 10px;
+    padding-bottom: 8px;
+  }
+
+  .hour-card,
+  .day-card,
+  .forecast-item {
+    flex: 0 0 130px;
+  }
+}
+
+@media (max-width: 560px) {
+  .info-grid,
+  .weather-stats,
+  .stats-row,
+  .stats-grid,
+  .hero-stats,
+  .payment-methods,
+  .split-fields,
+  .demo-logins {
+    grid-template-columns: 1fr !important;
+  }
+
+  .login-box {
+    padding: 22px !important;
+    border-radius: 18px !important;
+  }
+
+  .login-box h2,
+  .login-box h1 {
+    font-size: 26px !important;
+  }
+
+  .feature-card,
+  .product-card,
+  .card,
+  .panel,
+  .summary,
+  .bill-card {
+    min-height: auto !important;
+  }
+
+  .modal,
+  .payment-modal,
+  .product-modal,
+  .dialog {
+    inset: 10px !important;
+    width: auto !important;
+    max-height: calc(100vh - 20px) !important;
+    overflow-y: auto !important;
+  }
+
+  #chat .chat-box {
+    border-radius: 16px !important;
+  }
+
+  #chat .chat-body {
+    height: min(310px, calc(100vh - 330px)) !important;
+  }
+
+  #chat .chat-quick {
+    max-height: 72px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .content,
+  .app,
+  .market-page,
+  .page,
+  .container,
+  main {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .hero,
+  .market-hero,
+  .weather-summary,
+  .role-card,
+  .smart-device-card {
+    padding: 12px !important;
+  }
+
+  .chat-footer {
+    gap: 6px !important;
+    padding: 10px !important;
+  }
+
+  .chat-footer button {
+    padding: 10px 12px !important;
+  }
+}
+/* Three dots mobile menu */
+.mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .mobile-menu-toggle {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 2147482500;
+    width: 46px;
+    height: 46px;
+    border: 0;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, #14532d, #16a34a);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, .24);
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  body:not(.mobile-menu-open) .sidebar,
+  body:not(.mobile-menu-open) .top .nav,
+  body:not(.mobile-menu-open) .header .nav,
+  body:not(.mobile-menu-open) .nav-row,
+  body:not(.mobile-menu-open) .quick-nav,
+  body:not(.mobile-menu-open) .nav-links,
+  body:not(.mobile-menu-open) .top-nav {
+    display: none !important;
+  }
+
+  body.mobile-menu-open .sidebar {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    width: min(86vw, 330px) !important;
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+    border-radius: 0 22px 22px 0 !important;
+    padding-top: 70px !important;
+    z-index: 2147482000 !important;
+  }
+
+  body.mobile-menu-open .top .nav,
+  body.mobile-menu-open .header .nav,
+  body.mobile-menu-open .nav-row,
+  body.mobile-menu-open .quick-nav,
+  body.mobile-menu-open .nav-links,
+  body.mobile-menu-open .top-nav {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+    padding: 58px 6px 8px !important;
+    gap: 8px !important;
+  }
+
+  body.mobile-menu-open .nav a,
+  body.mobile-menu-open .nav-row a,
+  body.mobile-menu-open .quick-nav a,
+  body.mobile-menu-open .nav-links a,
+  body.mobile-menu-open .top-nav a {
+    flex: 0 0 auto;
+  }
+
+  body.mobile-menu-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, .38);
+    z-index: 2147481000;
+    pointer-events: none;
+  }
+
+  body.mobile-menu-open .mobile-menu-toggle {
+    background: linear-gradient(135deg, #f59e0b, #16a34a);
+  }
+
+  .wrap,
+  .content,
+  .app,
+  .market-page,
+  main {
+    padding-top: 72px !important;
+  }
+}
+
+
+/* Shared dashboard sidebar */
+.has-shared-dashboard-sidebar {
+  padding-left: 292px;
+}
+
+.has-shared-dashboard-sidebar .wrap {
+  max-width: 1220px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.has-shared-dashboard-sidebar .top .nav {
+  display: none !important;
+}
+
+.shared-dashboard-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 292px;
+  min-height: 100vh;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  z-index: 900;
+  color: #fff;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(250, 204, 21, 0.28), transparent 32%),
+    linear-gradient(160deg, #0f3d24 0%, #14532d 48%, #166534 100%);
+  box-shadow: 20px 0 45px rgba(15, 23, 42, 0.18);
+}
+
+.shared-brand,
+.sidebar-profile,
+.side-link,
+.side-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.shared-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px 14px;
+}
+
+.brand-icon,
+.profile-ring {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.shared-brand strong,
+.sidebar-profile strong {
+  display: block;
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.shared-brand small,
+.sidebar-profile small {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+}
+
+.side-nav {
+  display: grid;
+  gap: 7px;
+}
+
+.side-link,
+.side-footer a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 44px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 900;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.side-link i,
+.side-footer i {
+  width: 20px;
+  text-align: center;
+}
+
+.side-link:hover,
+.side-link.active,
+.side-footer a:hover {
+  color: #14532d;
+  background: #f8fafc;
+  transform: translateX(4px);
+}
+
+.side-footer {
+  display: grid;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 980px) {
+  .has-shared-dashboard-sidebar {
+    padding-left: 0;
+  }
+
+  body:not(.mobile-menu-open) .shared-dashboard-sidebar {
+    display: none !important;
+  }
+
+  body.mobile-menu-open .shared-dashboard-sidebar {
+    display: flex !important;
+    width: min(86vw, 310px) !important;
+    animation: sharedSidebarIn 0.24s ease both;
+  }
+
+  .has-shared-dashboard-sidebar .wrap {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@keyframes sharedSidebarIn {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+

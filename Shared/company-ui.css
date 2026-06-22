@@ -1,0 +1,313 @@
+﻿/* Smart Farmer company-wide premium UI polish */
+:root {
+  --sf-ink: #142018;
+  --sf-muted: #66756b;
+  --sf-line: #dce8df;
+  --sf-paper: #ffffff;
+  --sf-wash: #f4f8f1;
+  --sf-green: #168a4a;
+  --sf-green-dark: #0f5f38;
+  --sf-lime: #dff7e7;
+  --sf-gold: #d89a21;
+  --sf-blue: #dff1ff;
+  --sf-shadow: 0 20px 55px rgba(21, 35, 25, 0.12);
+  --sf-radius: 12px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(22, 138, 74, 0.12), transparent 32%),
+    radial-gradient(circle at 86% 12%, rgba(216, 154, 33, 0.12), transparent 28%),
+    var(--sf-wash) !important;
+  color: var(--sf-ink);
+}
+
+body::selection { background: var(--sf-green-dark); color: #fff; }
+
+button, .btn, .login-btn, .mini-action, a {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+button:hover, .btn:hover, .login-btn:hover, .mini-action:hover {
+  transform: translateY(-2px);
+}
+
+/* Login */
+.login-box {
+  width: min(94vw, 920px) !important;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(280px, 1.1fr);
+  gap: 28px;
+  align-items: center;
+  padding: clamp(24px, 4vw, 46px) !important;
+  border-radius: var(--sf-radius) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  background: rgba(12, 34, 22, 0.74) !important;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.32) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-box::before {
+  content: "AgriTech Product Demo";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #e7fff0;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.login-box .logo {
+  text-align: left !important;
+  margin-bottom: 0 !important;
+  padding-right: 8px;
+}
+.login-box .logo i {
+  border-radius: 14px !important;
+  box-shadow: 0 18px 42px rgba(22, 138, 74, 0.35);
+}
+.login-box .logo h1 { font-size: clamp(32px, 5vw, 52px) !important; line-height: 1.02; }
+.login-box .logo p { margin-top: 12px; max-width: 310px; line-height: 1.7; color: #d9efe1 !important; }
+.login-box form {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--sf-radius);
+  background: rgba(255, 255, 255, 0.10);
+}
+.input-box input, .role-panel select {
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.13) !important;
+}
+.login-btn {
+  border-radius: 10px !important;
+  background: linear-gradient(135deg, #18a85a, #0f6a3e) !important;
+  box-shadow: 0 16px 34px rgba(20, 120, 66, 0.28);
+}
+.demo-logins span {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-weight: 800;
+}
+
+/* Shared application shell */
+.sidebar, .shared-dashboard-sidebar {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(216, 154, 33, 0.26), transparent 30%),
+    linear-gradient(180deg, #0d2f1d, #133823 58%, #172018) !important;
+  box-shadow: 18px 0 50px rgba(15, 23, 42, 0.18) !important;
+}
+.side-nav a, .side-footer a, .side-link {
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px !important;
+}
+.content, .wrap, .market-page, .weather-page, .app, .page, main {
+  position: relative;
+}
+
+.hero, .market-hero, .weather-summary, .topbar, .header, .admin-hero {
+  border-radius: var(--sf-radius) !important;
+  box-shadow: var(--sf-shadow) !important;
+}
+
+.card, .feature-card, .product-card, .stat, .panel, .role-card, .smart-device-card,
+.advice-card, .activity-card, .weather-alert-panel, .visual-card, .gallery-card,
+.checkout-panel, .summary-box, .bill-card, .equipment-card, .service-card, article {
+  border-radius: var(--sf-radius) !important;
+}
+
+.card, .feature-card, .product-card, .stat, .panel, .role-card, .smart-device-card,
+.advice-card, .activity-card, .weather-alert-panel, .visual-card, .gallery-card,
+.checkout-panel, .summary-box, .bill-card, .equipment-card, .service-card {
+  border: 1px solid var(--sf-line) !important;
+  box-shadow: 0 14px 36px rgba(21, 35, 25, 0.08) !important;
+}
+
+.card:hover, .feature-card:hover, .product-card:hover, .equipment-card:hover, .service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 48px rgba(21, 35, 25, 0.14) !important;
+  border-color: rgba(22, 138, 74, 0.36) !important;
+}
+
+.eyebrow, .tag, .badge, .small-badge {
+  letter-spacing: 0 !important;
+  border-radius: 999px !important;
+}
+
+.btn.primary, .primary-btn, .mini-action, .device button {
+  background: linear-gradient(135deg, var(--sf-green), var(--sf-green-dark)) !important;
+  color: #fff !important;
+  border: 0 !important;
+  box-shadow: 0 14px 28px rgba(22, 138, 74, 0.22) !important;
+}
+.btn.secondary, .secondary-btn {
+  border: 1px solid var(--sf-line) !important;
+}
+
+/* Company dashboard banner injected by existing headings */
+.wrap > .top, .content > .section-head, .market-page > .top, .weather-page > .top {
+  margin-bottom: 20px !important;
+}
+.wrap > .top h1, .content h1, .market-page h1, .weather-page h1 {
+  color: var(--sf-green-dark) !important;
+}
+
+.dashboard-showcase .large-visual::after, .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  opacity: 0.8;
+}
+
+.smart-popup {
+  border-radius: var(--sf-radius) !important;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.22) !important;
+}
+
+/* Tables and forms */
+input, select, textarea {
+  border-radius: 10px !important;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+th, td { border-bottom: 1px solid var(--sf-line); }
+
+@media (max-width: 860px) {
+  .login-box {
+    grid-template-columns: 1fr;
+  }
+  .login-box .logo { text-align: center !important; }
+  .login-box .logo p { margin-left: auto; margin-right: auto; }
+}
+
+@media (max-width: 520px) {
+  .login-box form { padding: 16px; }
+  .login-box::before { display: none; }
+}
+
+/* Global font scale adjustment */
+html {
+  font-size: 15px;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "Poppins", Arial, sans-serif !important;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand strong,
+.logo h1 {
+  letter-spacing: 0 !important;
+}
+
+h1 {
+  font-size: clamp(2rem, 3.4vw, 3.4rem) !important;
+  line-height: 1.08 !important;
+}
+
+h2 {
+  font-size: clamp(1.55rem, 2.55vw, 2.45rem) !important;
+  line-height: 1.16 !important;
+}
+
+h3 {
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem) !important;
+  line-height: 1.25 !important;
+}
+
+p,
+li,
+small,
+a,
+span,
+label,
+input,
+select,
+textarea,
+button {
+  letter-spacing: 0 !important;
+}
+
+p,
+li {
+  font-size: 0.95rem;
+}
+
+.btn,
+.primary-btn,
+.secondary-btn,
+.login-btn,
+.reset-btn,
+.mini-action,
+.nav-links a,
+.nav a,
+.side-nav a,
+.side-footer a {
+  font-size: 0.9rem !important;
+}
+
+.eyebrow,
+.badge,
+.tag,
+.small-badge {
+  font-size: 0.72rem !important;
+}
+
+.hero h1,
+.story-content h1 {
+  font-size: clamp(2.1rem, 4vw, 4rem) !important;
+}
+
+.hero p,
+.story-content p {
+  font-size: clamp(0.92rem, 1.2vw, 1.02rem) !important;
+}
+
+.logo h1,
+.brand strong {
+  font-size: clamp(1.05rem, 1.6vw, 1.45rem) !important;
+}
+
+.card p,
+.feature-card p,
+.product-card p,
+.role-card p,
+.panel p,
+.stat small {
+  font-size: 0.9rem !important;
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 7vw, 2.35rem) !important;
+  }
+
+  h2 {
+    font-size: clamp(1.35rem, 5.4vw, 1.9rem) !important;
+  }
+
+  h3 {
+    font-size: clamp(1rem, 4.5vw, 1.25rem) !important;
+  }
+}

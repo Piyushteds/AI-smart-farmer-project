@@ -1,0 +1,256 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Farmer Weather</title>
+    <link rel="stylesheet" href="weather.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314532d'/%3E%3Cpath d='M32 51c-8-9-15-18-15-29 10 0 16 5 18 14 3-7 8-11 16-12-1 16-8 25-19 27Z' fill='%23dcfce7'/%3E%3Cpath d='M31 50c2-12 5-22 13-30' stroke='%23facc15' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <script src="../Shared/auth.js"></script>
+    <script src="../Shared/role-ui.js"></script>
+    <script src="../Shared/role-content.js"></script>
+      <link rel="stylesheet" href="../Shared/responsive.css" />
+  
+    <link rel="stylesheet" href="../Shared/company-ui.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div class="title-block">
+          <nav class="nav-row">
+            <a class="back-link" href="../Dashboard/main.html"
+              ><i class="fas fa-home"></i>Home</a
+            >
+            <a data-roles="farmer,vendor,user,admin" href="../Marketplace/marketplace.html"
+              ><i class="fa-solid fa-store"></i> Marketplace</a
+            >
+            <a data-roles="farmer,admin" href="../Services/diseaseupload.html"
+              ><i class="fa-solid fa-leaf"></i> Disease</a
+            >
+            <a data-roles="farmer,vendor,admin" href="../Services/eqipmentrental.html"
+              ><i class="fa-solid fa-tractor"></i> Equipment</a
+            >
+            <a
+              data-roles="farmer,vendor,user,admin"
+              href="../Services/expertconsulation.html"
+              ><i class="fa-solid fa-user-doctor"></i>Experts</a
+            >
+          </nav>
+          <span class="page-kicker"
+            ><i
+              class="fa-solid fa-cloud-sun"
+              style="
+                border: 1px solid #14532d;
+                border-radius: 5%;
+                padding: 5px;
+                color: rgb(98, 250, 4);
+                background-color: #14532d;
+              "
+            ></i>
+            Smart Farmer Weather</span
+          >
+          <h1>Plan field work with live weather</h1>
+          <p id="liveTime">Loading time...</p>
+        </div>
+        <div class="header-actions">
+          <label class="select-wrap" for="citySelect">
+            <span>City</span>
+            <select id="citySelect" aria-label="Select city">
+              <option>Ahmedabad</option>
+              <option>Mumbai</option>
+              <option>Delhi</option>
+              <option>Bangalore</option>
+              <option>Chennai</option>
+              <option>Kolkata</option>
+              <option>Hyderabad</option>
+              <option>Pune</option>
+              <option>Jaipur</option>
+              <option>Surat</option>
+              <option>Patna</option>
+              <option>Ranchi</option>
+            </select>
+          </label>
+          <div class="unit-toggle" role="group" aria-label="Temperature unit">
+            <button id="celsiusBtn" class="active" type="button">
+              Celsius
+            </button>
+            <button id="fahrenheitBtn" type="button">Fahrenheit</button>
+          </div>
+          <button id="refreshBtn" class="refresh-btn" type="button">
+            <i class="fa-solid fa-rotate-right"></i> Refresh
+          </button>
+        </div>
+      </header>
+
+      <section class="status" id="statusBox">
+        Fetching latest weather...
+      </section>
+
+      <section class="weather-alert-panel success" id="weatherAlertPanel">
+        <div class="alert-icon" id="weatherAlertIcon">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+          <span class="eyebrow">Live Crop Alert</span>
+          <h2 id="weatherAlertTitle">Weather alert loading</h2>
+          <p id="weatherAlertText">
+            Weather ke hisaab se field work, irrigation aur spray ka safe
+            suggestion yahan show hoga.
+          </p>
+        </div>
+      </section>
+      <section class="dashboard-grid">
+        <article class="weather-summary">
+          <div class="summary-top">
+            <div>
+              <span class="eyebrow" id="locationName">Ahmedabad, IN</span>
+              <h2 id="mainTemp">--</h2>
+              <p id="weatherStatus">Loading</p>
+              <p id="feelsLike">Feels like --</p>
+            </div>
+            <img id="weatherIcon" alt="Weather icon" />
+          </div>
+          <div class="summary-bottom">
+            <span id="updatedAt">Updated just now</span>
+            <span id="forecastSummary">Forecast loading...</span>
+          </div>
+        </article>
+
+        <article class="scene-box">
+          <img id="sceneImage" alt="Weather scene" />
+        </article>
+
+        <article class="advice-card">
+          <span class="eyebrow">Farm Advisory</span>
+          <h2 id="adviceTitle">Checking conditions</h2>
+          <p id="adviceText">Weather-based farming advice will appear here.</p>
+          <div class="advice-tags">
+            <span id="irrigationTag">Irrigation: --</span>
+            <span id="sprayTag">Spray: --</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="weather-visuals">
+        <article class="visual-card">
+          <img id="cropImage" alt="Crop weather condition" />
+          <div>
+            <span class="eyebrow">Crop Focus</span>
+            <h3 id="cropImageTitle">Crop condition</h3>
+            <p id="cropImageText">
+              Live weather ke basis par crop care sentence yahan update hoga.
+            </p>
+          </div>
+        </article>
+        <article class="visual-card">
+          <img id="actionImage" alt="Recommended farm action" />
+          <div>
+            <span class="eyebrow">Action Plan</span>
+            <h3 id="actionImageTitle">Today action</h3>
+            <p id="actionImageText">
+              Irrigation, spray aur outdoor work ka clear action yahan milega.
+            </p>
+          </div>
+        </article>
+        <article class="visual-card">
+          <img id="riskImage" alt="Weather risk advisory" />
+          <div>
+            <span class="eyebrow">Risk Watch</span>
+            <h3 id="riskImageTitle">Risk level</h3>
+            <p id="riskImageText">
+              Danger, warning ya success status yahan weather ke saath change
+              hoga.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="city-weather-note" id="cityWeatherNote">
+        <div>
+          <span class="eyebrow">City Wise Smart Sentence</span>
+          <h2 id="cityWeatherTitle">City weather planning</h2>
+          <p id="cityWeatherText">Selected city ke live weather ke according crop, irrigation aur safety sentence yahan update hoga.</p>
+        </div>
+        <p id="citySafetyText">Farmer safety aur field action ka short message yahan show hoga.</p>
+      </section>
+
+      <section class="weather-gallery-section">
+        <div class="section-title">
+          <div>
+            <span class="page-kicker">Weather Images</span>
+            <h2>Smart Field Gallery</h2>
+          </div>
+        </div>
+        <div id="weatherGallery" class="weather-gallery"></div>
+      </section>
+      <section class="info-box">
+        <article class="info-card">
+          <i class="fa-solid fa-cloud-rain"></i><span>Cloud / Rain</span
+          ><strong id="rain">--</strong>
+        </article>
+        <article class="info-card">
+          <i class="fa-solid fa-wind"></i><span>Wind</span
+          ><strong id="wind">--</strong>
+        </article>
+        <article class="info-card">
+          <i class="fa-solid fa-droplet"></i><span>Humidity</span
+          ><strong id="humidity">--</strong>
+        </article>
+        <article class="info-card">
+          <i class="fa-solid fa-leaf"></i><span>Air Quality</span
+          ><strong id="airQuality">--</strong>
+        </article>
+        <article class="info-card">
+          <i class="fa-solid fa-gauge-high"></i><span>Pressure</span
+          ><strong id="pressure">--</strong>
+        </article>
+        <article class="info-card">
+          <i class="fa-solid fa-eye"></i><span>Visibility</span
+          ><strong id="visibility">--</strong>
+        </article>
+        <article class="info-card">
+          <i class="fa-solid fa-sun"></i><span>Sunrise</span
+          ><strong id="sunrise">--</strong>
+        </article>
+        <article class="info-card">
+          <i class="fa-solid fa-moon"></i><span>Sunset</span
+          ><strong id="sunset">--</strong>
+        </article>
+      </section>
+
+      <section class="forecast-card">
+        <div class="section-title">
+          <div>
+            <span class="page-kicker">Today</span>
+            <h2>Hourly Forecast</h2>
+          </div>
+        </div>
+        <div id="hourlyRow" class="hourly-row"></div>
+      </section>
+
+      <section class="forecast-card">
+        <div class="section-title">
+          <div>
+            <span class="page-kicker">7 Day Outlook</span>
+            <h2>Next Days</h2>
+          </div>
+        </div>
+        <div id="weekRow" class="week-row"></div>
+      </section>
+    </main>
+    <script src="weather.js"></script>
+      <script src="../Shared/mobile-menu.js"></script>
+  </body>
+</html>
+
+
+
+
+
